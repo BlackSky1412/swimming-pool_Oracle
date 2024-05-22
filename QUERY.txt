@@ -1,0 +1,5 @@
+"SELECT c.id AS id, c.code AS code, c.name AS name, c.created_date AS createdDate
+, c.modified_date AS modifiedDate, c.price AS price, c.number_of_lesson AS numberOfLesson
+, c.discount AS discount, c.short_description AS shortDescription
+, c.avatar AS avatar, c.active AS active, c.slug AS slug
+FROM course c")

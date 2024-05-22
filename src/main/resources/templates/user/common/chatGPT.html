@@ -1,0 +1,34 @@
+<div class="collapse position-fixed col-md-5 col-sm-12" id="chatGPT" style="z-index: 10000; bottom: 20px; right: 0px;">
+    <div class="card" id="chat1" style="border-radius: 15px;">
+        <div
+                class="card-header d-flex justify-content-between align-items-center p-3 bg-info text-white border-bottom-0"
+                style="border-top-left-radius: 15px; border-top-right-radius: 15px;">
+            <i class="fa fa-angle-left" aria-hidden="true"></i>
+            <p class="mb-0 fw-bold">Chat GPT</p>
+            <i class="fa fa-times" aria-hidden="true" data-toggle="collapse" data-target="#chatGPT" style="cursor: pointer"></i>
+        </div>
+        <div class="card-body" style="height: 400px; overflow: auto">
+            <div class="message message-ASSISTANT">
+                <div class="image"></div>
+                <div class="content">
+                    <p class="small mb-0">Hồ bơi Thanh An có thể hỗ trợ gì cho bạn?</p>
+                </div>
+            </div>
+            <th:block th:each="message: ${session.get(T(com.swimmingpool.chatgpt.constant.ChatGptConstant).CHAT_HIS_KEY)}">
+
+                <div th:class="${'message message-' + message.role.name()}">
+                    <div class="image"></div>
+                    <div class="content">
+                        <p class="small mb-0" th:text="${message.content}"/>
+                    </div>
+                </div>
+
+            </th:block>
+        </div>
+        <div class="card-footer">
+            <div class="form-outline">
+                <input class="form-control" id="chat-gpt-input" placeholder="Bạn cần tư vấn điều gì?"/>
+            </div>
+        </div>
+    </div>
+</div>

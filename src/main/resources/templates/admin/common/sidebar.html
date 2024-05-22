@@ -1,0 +1,43 @@
+<!-- Sidebar -->
+<ul xmlns:th="http://www.thymeleaf.org" class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+    <!-- Sidebar - Brand -->
+    <a class="sidebar-brand d-flex align-items-center justify-content-center" href="${contextPath}/admin/home">
+        <div class="sidebar-brand-icon rotate-n-15">
+            <i class="fa fa-yelp" aria-hidden="true"></i>
+        </div>
+        <div class="sidebar-brand-text mx-3">Swimming Course</div>
+    </a>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider my-0">
+
+<!--    <li th:replace="~{admin/common/link :: link(@{/admin/category}, 'Dashboard', 'fa fa-table')}" />-->
+
+    <!-- Divider -->
+<!--    <hr class="sidebar-divider">-->
+
+    <th:block sec:authorize="hasAuthority('ADMIN')">
+        <li th:replace="~{admin/common/link :: link(@{/admin/pool}, 'Quản lý hồ bơi', 'fa fa-bath')}" />
+        <li th:replace="~{admin/common/link :: link(@{/admin/course}, 'Quản lý khóa học', 'fa fa-table')}" />
+        <li th:replace="~{admin/common/link :: link(@{/admin/assignment}, 'Phân công giảng dạy', 'fa fa-book')}" />
+        <li th:replace="~{admin/common/link :: link(@{/admin/user/staff}, 'Quản lý giáo viên', 'fa fa-user')}" />
+        <li th:replace="~{admin/common/link :: link(@{/admin/user/customer}, 'Quản lý học viên', 'fa fa-user')}" />
+        <li th:replace="~{admin/common/link :: link(@{/admin/order}, 'Quản lý đơn hàng', 'fa fa-table')}" />
+    </th:block>
+
+    <th:block sec:authorize="hasAuthority('TEACHER')">
+        <li th:replace="~{admin/common/link :: link(@{/teacher/time-table}, 'Thời khóa biểu', 'fa fa-table')}" />
+    </th:block>
+    <li th:replace="~{admin/common/link :: link(@{/ticket}, 'Phiếu yêu cầu', 'fa fa-table')}" />
+
+    <!-- Divider -->
+    <hr class="sidebar-divider d-none d-md-block">
+
+    <!-- Sidebar Toggler (Sidebar) -->
+    <div class="text-center d-none d-md-inline">
+        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+    </div>
+
+</ul>
+<!-- End of Sidebar -->

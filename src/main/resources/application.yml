@@ -1,0 +1,93 @@
+server:
+  shutdown: graceful
+  max-http-request-header-size: 10KB
+
+db:
+  host: localhost
+  name: swimming-pool
+
+spring:
+  profiles:
+    active: dev
+  application:
+    name: swimming-pool
+    version: 1.0.0
+    formatted-version: v1.0.0
+  servlet:
+    multipart:
+      enabled: true
+      resolve-lazily: true
+      max-file-size: 5MB
+      max-request-size: 5MB
+      file-size-threshold: 5MB
+  docker:
+    compose:
+      enabled: false
+      file: docker-compose.yaml
+  datasource:
+    username: HOBOIUS
+    password: Manhtran1412
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521:orcl
+    hikari:
+      auto-commit: false
+      connection-timeout: 10000
+      maximum-pool-size: 10
+  jpa:
+    open-in-view: false
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+  data:
+    redis:
+      repositories:
+        enabled: false
+  main:
+    allow-bean-definition-overriding: true
+  cache:
+    type: none
+logging:
+  file:
+    name: logs/swimming-pool.log
+# firebase
+firebase:
+  enable: true
+  location: firebase.json
+  bucket: swimming-pool-3728e.appspot.com
+  urlImage: 'https://firebasestorage.googleapis.com/v0/b/{0}/o/{1}?alt=media'
+
+# paypal api
+paypal:
+  client-id: AQq0ul4ZlpCXokhrnONUkDifaPe5ZXtPuPu0Ye3KrZ7h6d5a71fLNGtzw8wiIkWfqRfAe2zTl1TBOkEh
+  client-secret: ECdZ-vjaJQ6DpTWyJi-l7o_JngLdFbFJTCaRJVyiGTHOuBYB2tB2ECYP51EfntHZy0M1u0RFBeCgo2Rc
+  mode: sandbox
+  currency: ${rate.currency}
+  success-url: ${app.host}:${app.port}/${app.contenxt-path}payment/execute
+  cancel-url: ${app.host}:${app.port}/${app.contenxt-path}payment/cancel
+
+# rate
+rate:
+  exchange:
+    enabled: true
+  currency: EUR
+  access-token: 0ae9f8ed709d751cd3bc8d630dab3d06
+  url: 'http://api.exchangeratesapi.io/v1'
+
+# cache
+cache:
+  enable: false
+  host: localhost
+  port: 6379
+  password: 123456
+  properties:
+    - name: ACTIVE_POOL
+      ttl: 1440
+    - name: ACTIVE_COURSE
+      ttl: 1440
+    - name: CART
+      ttl: 1440
+chatgpt:
+  url: 'https://api.openai.com'
+  api-key: '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'
+  model: gpt-3.5-turbo
+  timeout: 60000

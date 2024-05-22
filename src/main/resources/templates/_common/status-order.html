@@ -1,0 +1,8 @@
+<div th:fragment="statusOrder(value)" th:switch="${value}">
+    <th:block th:case="'PAID'">
+        <strong class="text-success">Đã thanh toán</strong>
+    </th:block>
+    <th:block th:case="*">
+        <strong class="text-warning">Chưa thanh toán</strong>
+    </th:block>
+</div>

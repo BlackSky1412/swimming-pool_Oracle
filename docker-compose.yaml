@@ -1,0 +1,52 @@
+version: '3.8'
+services:
+#  swimming_pool:
+#    build:
+#      dockerfile: Dockerfile
+#      target: runner
+#    image: swimming-pool:1.0.0
+#    container_name: swimming_pool
+#    ports: 
+#      - "8080:8080"
+#    depends_on:
+#      - database
+#    environment:
+#      spring.profiles.active: dev
+#      spring.datasource.password: $MYSQL_ROOT_PASSWORD
+#      redis.password: $REDIS_PASSWORD
+#      redis.host: cache 
+#      redis.port: 6379
+#      db.host: database
+#      db.name: swimming-pool
+  database:
+    image: mysql:8.0.34-debian
+    container_name: database
+    restart: always
+    ports:
+      - "3306:3306"
+    volumes:
+      - .\.docker\mysql:/var/lib/mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      MYSQL_DATABASE: swimming-pool
+      TZ: Asia/Ho_Chi_Minh
+  database-admin:
+    image: phpmyadmin:5.2.1-apache
+    container_name: mysql-admin
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
+      PMA_HOST: database
+    ports:
+      - "80:80"
+    depends_on:
+      - database
+  cache:
+    image: redis:alpine3.18
+    container_name: redis
+    restart: always
+    command: --requirepass $REDIS_PASSWORD
+    ports:
+      - "6379:6379"
+    volumes:
+    - .\.docker\redis:/data
